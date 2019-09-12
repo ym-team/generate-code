@@ -1,0 +1,49 @@
+package ${package}.model;
+
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+import com.evergrande.util.conversion.JsonUtil;
+
+/**
+ * ${comment}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+public class ${className}Model implements Serializable{
+
+
+	private static final long serialVersionUID=1L;
+
+	#foreach ($column in $columns)
+	/**$column.comment*/
+    private $column.attrType $column.attrname;
+	#end
+	
+	
+	#foreach ($column in $columns)
+	/**
+	 * 设置：${column.comment}
+	 */
+	public void set${column.attrName}($column.attrType $column.attrname) {
+			this.$column.attrname = $column.attrname;
+	}
+	/**
+	 * 获取：${column.comment}
+	 */
+	public $column.attrType get${column.attrName}() {
+			return $column.attrname;
+	}
+	#end
+	
+  	//JSON 
+   	public String toString() {
+   		return JsonUtil.toJsonString(this);
+
+   	}
+ 
+	
+}

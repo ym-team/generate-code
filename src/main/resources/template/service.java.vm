@@ -1,0 +1,94 @@
+package ${package}.service;
+
+
+import java.util.List;
+import com.github.pagehelper.PageHelper;
+
+import com.evergrande.api.page.Pagination;
+import com.evergrande.core.page.QueryData;
+
+//import com.evergrande.common.Pagination;
+//import com.evergrande.common.QueryData;
+
+import ${package}.model.${className}Model;
+
+
+
+/**
+ * <p>
+ * ${comment} 服务类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${datetime}
+ */
+public interface ${className}Service {
+
+
+	/**
+	   * 新增
+	   * @param ${className}Model
+	   * @return long
+	   *
+	   */
+	public long save${className}Model(${className}Model  ${secondModuleName}Model);
+	
+	
+	
+
+	/**
+	   *批量新增
+	   * @param ${className}Model
+	   * @return
+	   */
+	public int saveList${className}Model(List<${className}Model>  list${className}Model);
+	
+
+  	 /**
+	   * 查询详情
+	   * @param ${className}Model
+	   * @return ${className}Model
+	   */
+	public ${className}Model queryDetail${className}Model(${className}Model ${secondModuleName}Model);
+  
+	/**查询列表
+	 * 
+	 * @param ${secondModuleName}Model
+	 * @return List<${secondModuleName}Model>
+	 */
+	public List<${className}Model> queryList${className}Model(${className}Model ${secondModuleName}Model);
+	  
+	  
+	/**分页查询列表
+	 * 
+	 * @param ${className}Model
+	 * @param page
+	 * @return QueryData
+	 */
+	public QueryData queryListByPage${className}Model(${className}Model ${secondModuleName}Model,Pagination page);
+	
+		  
+	/**
+	 *更新
+	 * @param ${className}Model
+	 * @return
+	 */
+	public int update${className}Model(${className}Model ${secondModuleName}Model);
+	  
+	 /**删除 
+	  * 
+	  * @param ${className}Model
+	  *
+	  */
+	public int delete${className}Model(${className}Model ${secondModuleName}Model);
+	
+	/**
+	  * 查询总数
+	  * @param ${className}Model
+	  */
+	public Long queryCount${className}Model(${className}Model ${secondModuleName}Model);
+	  
+     
+  	
+	
+}

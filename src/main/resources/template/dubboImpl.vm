@@ -1,0 +1,189 @@
+package ${package}.dubbo.impl;
+
+import java.util.List;
+
+import com.evergrande.api.page.Pagination;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.stereotype.Component;
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
+import com.alibaba.dubbo.config.annotation.Service;
+
+import ${package}.vo.${className}SaveVo;
+import ${package}.vo.${className}QueryVo;
+import ${package}.vo.${className}UpdateVo;
+import ${package}.vo.${className}DeleteVo;
+
+import ${package}.dubbo.${className}Dubbo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import ${package}.facade.${className}Facade;
+import ${package}.model.${className}Model;
+import com.evergrande.util.conversion.JsonUtil;
+import org.springframework.beans.BeanUtils;
+
+/**
+ 
+ * ${comments} 
+ * @author ${author}
+ * @date  ${datetime}
+ */
+@Service 
+public class ${className}DubboImpl implements ${className}Dubbo{
+	
+	public static Logger LOGGER = LoggerFactory.getLogger(${className}DubboImpl.class);
+
+    @Autowired
+    private ${className}Facade ${secondModuleName}Facade;
+	
+	/** 新增
+	   * 
+	   * @param ${className}SaveVo
+	   * @return long
+	   * @throws Exception
+	   */
+	public long save${className}Model(@RequestBody ${className}SaveVo  ${secondModuleName}SaveVo){
+		LOGGER.info(" ${className}DubboImpl -> save${className}Model : " + JsonUtil.toJsonString(${secondModuleName}SaveVo));
+		
+		${className}Model ${secondModuleName}Model = new ${className}Model();
+		
+		if(null != ${secondModuleName}SaveVo){
+				BeanUtils.copyProperties(${secondModuleName}SaveVo,${secondModuleName}Model);
+		}
+		
+		LOGGER.info("");
+		
+		return this.${secondModuleName}Facade.save${className}Model(${secondModuleName}Model);
+		
+	
+	}
+	
+	
+	
+
+	/**批量新增
+	   * 
+	   * @param ${className}SaveVo
+	   * @return long
+	   * @throws Exception
+	   */
+	public long saveList${className}Model(@RequestBody List<${className}SaveVo>  list${className}SaveVo){
+		if(!CollectionsUtil.isEmpty(list${className}SaveVo)){
+			List<${className}Model> list${className}Model = new ArrayList<${className}Model>();
+			for(int i = 0 ; i < list${className}SaveVo.size(); i++){
+				${className}Model ${secondModuleName}Model = new ${className}Model();
+				BeanUtils.copyProperties(list${className}SaveVo.get(i),{strings.lowercaseFirstLetter($table.JavaName)}Model);
+				list${className}Model.add(${secondModuleName}Model);
+			}
+			this.${secondModuleName}Facade.saveList${className}Model(${secondModuleName}Model);
+		}
+		
+	}
+	
+
+  	 /**
+	   *  查询详情
+	   * @param ${className}QueryVo
+	   * @return ${className}QueryVo
+	   * @throws Exception
+	   */
+	public ${className}QueryVo queryDetail${className}Model(@RequestBody ${className}QueryVo ${secondModuleName}QueryVo){
+		if(null == ${secondModuleName}QueryVo){
+			return null;//TODO 
+		}
+		
+		${className}Model ${secondModuleName}Model = new ${className}Model();
+		BeanUtils.copyProperties(${secondModuleName}QueryVo,${secondModuleName}Model);
+		${secondModuleName}Model = this.${secondModuleName}Facade.queryDetail${className}Model( ${secondModuleName}Model);
+		BeanUtils.copyProperties(${secondModuleName}Model,${secondModuleName}QueryVo);
+		return ${secondModuleName}QueryVo;
+	}
+  
+	/**
+	 *查询列表
+	 * @param ${className}QueryVo
+	 * @return  List<${className}QueryVo>
+	 * @throws Exception
+	 */
+	public List<${className}QueryVo> queryList${className}Model(@RequestBody ${className}QueryVo ${secondModuleName}QueryVo){
+		if(null == ${secondModuleName}QueryVo){
+			return null;
+		}
+		${className}Model ${secondModuleName}Model = new ${className}Model();
+		BeanUtils.copyProperties(${secondModuleName}QueryVo,${secondModuleName}Model);
+		List<${className}Model> list${className}Model = this.${secondModuleName}Facade.queryList${className}Model(${secondModuleName}Model);
+		//TODO
+	}
+	  
+	/**
+	 * 分布查询列表
+	 * @param ${className}QueryVo
+	 * @param page
+	 * @return List<${className}QueryVo>
+	 * @throws Exception
+	 */
+	public List<${className}QueryVo> queryListByPage${className}Model(@RequestBody ${className}QueryVo ${secondModuleName}QueryVo,Pagination page){
+		if(null == ${secondModuleName}QueryVo){
+			return null;
+		}
+		
+		${className}Model ${secondModuleName}Model = new ${className}Model();
+		BeanUtils.copyProperties(${secondModuleName}QueryVo,${secondModuleName}Model);
+		this.${secondModuleName}Facade.queryListByPage${className}Model(${secondModuleName}Model,page);
+	}
+	  
+	/**
+	 * 更新
+	 * @param ${className}SaveVo
+	 * @return long
+	 * @throws Exception
+	 */
+	public long update${className}Model(@RequestBody ${className}UpdateVo ${secondModuleName}UpdateVo){
+		if(null == ${secondModuleName}UpdateVo){
+			return -1l;
+		}
+		${className}Model ${secondModuleName}Model = new ${className}Model();
+		BeanUtils.copyProperties(${secondModuleName}UpdateVo,${secondModuleName}Model);
+		return this.${secondModuleName}Facade.update${className}Model(${secondModuleName}Model);
+	}
+	  
+	 /** 
+	  * 删除
+	  * @param ${className}DeleteVo
+	  * @return long
+	  * @throws Exception
+	  */
+	public long delete${className}Model(@RequestBody ${className}DeleteVo ${secondModuleName}DeleteVo){
+		if(null == ${secondModuleName}DeleteVo){
+			return -1l;
+		}
+		
+		${className}Model ${secondModuleName}Model = new ${className}Model();
+		BeanUtils.copyProperties(${secondModuleName}DeleteVo,${secondModuleName}Model);
+		return this.${secondModuleName}Facade.delete${className}Model(${secondModuleName}Model);
+	}
+	
+	/**
+	  * 查询总数
+	  * @param ${className}QueryVo
+	  * @return long
+	  * @throws Exception
+	  */
+	public Long queryCount${className}Model(@RequestBody ${className}QueryVo ${secondModuleName}QueryVo){
+		if(null == ${secondModuleName}QueryVo){
+			return -1l;
+		}
+		${className}Model ${secondModuleName}Model = new ${className}Model();
+		BeanUtils.copyProperties(${secondModuleName}QueryVo,${secondModuleName}Model);
+		return this.${secondModuleName}Facade.queryCount${className}Model(${secondModuleName}Model);
+	}
+	
+	
+	  
+     
+
+}

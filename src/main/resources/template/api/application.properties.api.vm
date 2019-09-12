@@ -1,0 +1,34 @@
+spring.datasource.url=jdbc:mysql://mysql-dev.hd:3301/b2b_material_merchantdb?useSSL=false&autoReconnect=true
+spring.datasource.username=dev_user
+spring.datasource.password=FezorOOJKY/hxj4ce6rx+A==
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+
+spring.rabbitmq.host=rabbitmq
+spring.rabbitmq.port=5672
+spring.rabbitmq.username=mqadmin
+spring.rabbitmq.password=mqadmin
+
+eureka.client.fetch-registry=true
+
+feign.httpclient.enabled=true
+feign.hystrix.enabled=true
+user-server.ribbon.NFLoadBalancerRuleClassName=com.evergrande.core.balancer.HtGrayStrategy
+
+#redis
+#spring.redis.password=dev@hengda
+spring.redis.cluster.nodes=10.100.163.50:7000,10.100.163.50:7001,10.100.163.50:7002
+
+
+#dubbo
+spring.dubbo.application.name=user
+spring.dubbo.registry.address=zookeeper://zookeeper-dev.hd:2181
+spring.dubbo.protocol.name=dubbo
+spring.dubbo.protocol.port=20880
+spring.dubbo.scan=com.evergrande.userserver
+
+spring.cloud.stream.kafka.binder.brokers = kafka01:9092
+spring.cloud.stream.kafka.binder.zk-nodes = zk01:2181
+
+
+#
+app.online=true

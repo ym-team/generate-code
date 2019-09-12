@@ -1,0 +1,94 @@
+package ${package}.dubbo;
+
+import java.util.List;
+
+import com.evergrande.api.page.Pagination;
+
+import ${package}.vo.${className}SaveVo;
+import ${package}.vo.${className}QueryVo;
+import ${package}.vo.${className}UpdateVo;
+import ${package}.vo.${className}DeleteVo;
+
+
+/**
+ * <p>
+ * $!{comments} 
+ * </p>
+ *
+ * @author ${author}
+ * @date  ${datetime}
+ */
+public interface ${className}Dubbo{
+
+	/**
+	   * 新增
+	   * @param ${className}SaveVo
+	   * @return long
+	   * @throws Exception
+	   */
+	public long save${className}Model(${className}SaveVo  ${secondModuleName}SaveVo);
+	
+	
+	
+
+	/**
+	   * 批量新增
+	   * @param ${className}SaveVo
+	   * @return
+	   * @throws Exception
+	   */
+	public int saveList${className}Model(List<${className}SaveVo>  list${className}SaveVo);
+	
+
+  	 /**
+	   * 查询详情
+	   * @param ${className}QueryVo
+	   * @return
+	   * @throws Exception
+	   */
+	public ${className}QueryVo queryDetail${className}Model(${className}QueryVo ${secondModuleName}QueryVo);
+  
+	/**
+	 * 查询列表
+	 * @param ${className}QueryVo
+	 * @return List<${className}QueryVo>
+	 * @throws Exception
+	 */
+	public List<${className}QueryVo> queryList${className}Model(${className}QueryVo ${secondModuleName}QueryVo);
+	  
+	/**
+	 * 分布查询列表
+	 * @param ${className}QueryVo
+	 * @param page
+	 * @return	List<${className}QueryVo>
+	 * @throws Exception
+	 */
+	public List<${className}QueryVo> queryListByPage${className}Model(${className}QueryVo ${secondModuleName}QueryVo,Pagination page);
+	  
+	/**
+	 * 更新
+	 * @param ${className}UpdateVo
+	 * @return int
+	 * @throws Exception
+	 */
+	public int update${className}Model(${className}UpdateVo ${secondModuleName}UpdateVo);
+	  
+	 /**
+	  * 
+	  * @param ${className}DeleteVo
+	  * @throws Exception
+	  */
+	public int delete${className}Model(${className}DeleteVo ${secondModuleName}DeleteVo);
+	
+	/**
+	  *删除  
+	  * @param ${className}QueryVo
+	  * @throws Exception
+	  */
+	public Long queryCount${className}Model(${className}QueryVo ${secondModuleName}QueryVo);
+	
+	
+	  
+     
+
+}

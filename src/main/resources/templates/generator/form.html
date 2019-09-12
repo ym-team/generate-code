@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/plugins/bootstrap-table/css/bootstrap-table.min.css"/>
+    <link rel="stylesheet" href="/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="/css/global.css" media="all">
+    <link rel="stylesheet" href="/plugins/font-awesome/css/font-awesome.min.css">
+</head>
+
+<body>
+<div class="admin-main">
+    <form class="layui-form" id="generatorForm" onsubmit="javascript:return false;">
+        <div class="layui-form-item">
+            <label class="layui-form-label form-label"><span style="color: red">*</span>&nbsp;模块名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="moduleName" id="moduleName" required  lay-verify="moduleName" placeholder="请输入模块名称" autocomplete="off" class="layui-input form-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label form-label">过滤表前缀</label>
+            <div class="layui-input-block">
+                <input type="text" name="tablePrefix" placeholder="请输入过滤表前缀" autocomplete="off" class="layui-input form-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label form-label"><span style="color: red">*</span>&nbsp;作者</label>
+            <div class="layui-input-block">
+                <input type="text" name="author" id="author" required  lay-verify="author" placeholder="请输入作者" autocomplete="off" class="layui-input form-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label form-label">使用Lombok</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="isUseLombok" lay-skin="switch" lay-text="开启|关闭" checked>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label form-label">单表操作方法</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="isSingleTableOperation" lay-skin="switch" lay-text="开启|关闭">
+            </div>
+        </div>
+        <button type="button" class="layui-btn" id="downloadIDL">
+            <i class="layui-icon">&#xe601;</i>&nbsp;下载IDL模板
+        </button>
+        <button type="button" class="layui-btn" id="uploadIDLButton" onclick="$('#uploadIDL').click();">
+            <i class="layui-icon">&#xe62f;</i>&nbsp;上传IDL模板
+        </button>
+        <input type="file" name="uploadIDL" id="uploadIDL" lay-type="file" lay-ext="java" class="layui-upload-file">
+        <input type="hidden" name="IDLFileName" id="IDLFileName" required  lay-verify="IDLFileName">
+    </form>
+</div>
+<script type="text/javascript" src="/plugins/jquery.min.js"></script>
+<script type="text/javascript" src="/bootstrap.min.js"></script>
+<script type="text/javascript" src="/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="/layui.js"></script>
+<script type="text/javascript" src="/js/generator.js"></script>
+</body>
+
+</html>

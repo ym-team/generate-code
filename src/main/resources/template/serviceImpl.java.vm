@@ -1,0 +1,129 @@
+package ${package}.service.impl;
+
+import ${package}.model.${className}Model;
+import ${package}.mapper.${className}Mapper;
+import ${package}.service.${className}Service;
+import org.springframework.stereotype.Service;
+
+/**
+ * <p>
+ * ${comments} 服务实现类
+ * </p>
+ 
+ *
+ * @author ${author}
+ * @date  ${datetime}
+ */
+@Service
+public class ${className}ServiceImpl implements ${className}Service  {
+
+
+  @Autowired
+  private ${className}Mapper ${secondModuleName}Mapper;
+  
+  
+     /**
+	   * 新增
+	   * @param ${className}Model
+	   * @return long
+	 */
+	  @Override
+	  public long save${className}Model(${className}Model ${secondModuleName}Model) {
+		int count = this.${secondModuleName}Mapper.save${className}Model(${secondModuleName}Model);
+	    return ${secondModuleName}Model.get${pk.attrName}();
+	  }
+  
+	   /**
+		 *
+		 * @param List<${className}Model>
+		  * @return	int
+		*/
+	  @Override
+	  public int saveList${className}Model(List<${className}Model> list${className}Model) {
+		int count = this.${secondModuleName}Mapper.saveList${className}Model(list${className}Model);
+	    return count;
+	  }
+
+  
+  
+  	/**
+	   *
+	   * @param ${className}Model
+	   * @return	${className}Model
+	   */
+	@Override
+	public ${className}Model queryDetail${className}Model(${className}Model ${secondModuleName}Model) {
+		${secondModuleName}Model = this.${secondModuleName}Mapper.queryDetail${className}Model(${secondModuleName}Model);
+		return ${secondModuleName}Model;
+	}
+  
+	/**
+	 * 
+	 * @param ${className}Model
+	 * @return	List<${className}Model>
+	 */
+	@Override
+	public List<${className}Model> queryList${className}Model(${className}Model ${secondModuleName}Model){
+		List<${className}Model> list${table.JavaName}Model = this.${secondModuleName}Mapper.queryList${className}Model(${secondModuleName}Model);
+		return list${className}Model;
+	}
+	  
+	
+	/**
+	 * 
+	 * @param ${className}Model
+	 * @param page
+	 * @return QueryData
+	 */
+	public QueryData queryListByPage${className}Model(${className}Model ${secondModuleName}Model,Pagination page) {
+		List<${className}Model> list${className}Model = new ArrayList<${className}Model>();
+		QueryData queryData = new QueryData();
+		
+		Page<Object> startPage = PageHelper.startPage(page.getCurrentPage(), page.getPageSize(), page.getOrderby());
+		list${className}Model = this.queryList${className}Model(${secondModuleName}Model);
+		 
+		queryData.setCurrPage(page.getCurrentPage());
+		queryData.setDataList(list${className}Model);
+		String total = String.valueOf(startPage.getTotal());
+		queryData.setTotalCount(Integer.valueOf(total));
+	    queryData.build();
+		queryData.setPageSize(page.getPageSize());
+	
+		return queryData;
+	}
+	
+	
+	  
+	/**
+	 *
+	 * @param ${className}Model
+	 * @return int
+	 */
+	 @Override
+	public int update${className}Model(${className}Model ${secondModuleName}Model) {
+		return this.${secondModuleName}Mapper.update${className}Model(${secondModuleName}Model);
+	}
+	  
+	 /**
+	  * 
+	  * @param ${className}Model
+	  * @return int
+	  */
+	  @Override
+	public int delete${className}Model(${className}Model ${secondModuleName}Model){
+		return this.${secondModuleName}Mapper.delete${className}Model(${secondModuleName}Model);
+	}
+	
+	/**
+	  * 
+	  * @param ${className}Model
+	  * @return Long
+	  */
+	 @Override
+	public Long queryCount${className}Model(${className}Model ${secondModuleName}Model){
+		return this.${secondModuleName}Mapper.queryCount${className}Model(${secondModuleName}Model);
+	}
+
+
+	
+}

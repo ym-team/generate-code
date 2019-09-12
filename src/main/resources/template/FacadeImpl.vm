@@ -1,0 +1,136 @@
+package ${package}.facade.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+
+import ${package}.model.${className}Model;
+import ${package}.service.${className}Service;
+import ${package}.facade.${className}Facade;
+
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.CacheEvict;
+
+
+
+
+import com.evergrande.api.page.Pagination;
+import com.evergrande.core.page.QueryData;
+import org.springframework.stereotype.Service;
+
+import com.github.pagehelper.Page;
+
+
+/**
+ *
+ * ${comment}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Service
+public class ${className}FacadeImpl implements ${className}Facade {
+
+  @Autowired
+  private ${className}Service ${secondModuleName}Service;
+
+     
+     /**新增 
+	   *
+	   * @param List<${className}Model>
+	   * @return	long
+	   * @CachePut(value = "${secondModuleName}", key = "#${pk.attrName}")
+	 */
+	  @Transactional()	 
+	  @Override
+	  public long save${className}Model(${className}Model ${secondModuleName}Model) {
+		long count = this.${secondModuleName}Service.save${className}Model(${secondModuleName}Model);
+	    return ${secondModuleName}Model.get${pk.attrName}()();
+	  }
+  
+	   /**批量新增
+	   * 
+	   * @param List<${className}Model>
+	   * @return int
+		 */
+	  @Transactional()	 
+	  @Override
+	  public int saveList${className}Model(List<${className}Model> list${className}Model) {
+		int count = this.${secondModuleName}Service.saveList${className}Model(list${className}Model);
+	    return count;
+	  }
+
+  
+  
+  	/**
+	   * 查询详情
+	   * @param ${className}Model
+	   * @return	${className}Model
+	   */
+	@Override
+	@Cacheable(value = "${secondModuleName}#120#120", key = "#${pk.attrname}", sync = true)
+	public ${className}Model queryDetail${className}Model(${className}Model ${secondModuleName}Model) {
+		${secondModuleName}Model = this.${secondModuleName}Service.queryDetail${className}Model(${secondModuleName}Model);
+		return ${secondModuleName}Model;
+	}
+  
+	/**
+	 *  查询列表
+	 * @param ${className}Model
+	 * @return	List<${className}Model>
+	 */
+	@Override
+	public List<${className}Model> queryList${className}Model(${className}Model ${secondModuleName}Model){
+		List<${className}Model> list${className}Model = this.${secondModuleName}Service.queryList${className}Model(${secondModuleName}Model);
+		return list${className}Model;
+	}
+	  
+	/**
+	 *  分页查询列表
+	 * @param ${className}Model
+	 * @param page
+	 * @return QueryData
+	 */
+	 @Override
+	public QueryData queryListByPage${className}Model(${className}Model ${secondModuleName}Model,Pagination page) {
+		return this.${secondModuleName}Service.queryListByPage${className}Model(${secondModuleName}Model,page);
+	}
+	
+	/**
+	 * 更新
+	 * @param ${className}Model
+	 * @return int
+	 */
+	 @Transactional()
+	 @Override
+	 @CacheEvict(value = "${secondModuleName}", key = "#${pk.attrName}")
+	public int update${className}Model(${className}Model ${secondModuleName}Model) {
+		return this.${secondModuleName}Service.update${className}Model(${secondModuleName}Model);
+	}
+	  
+	 /**
+	  * 删除 
+	  * @param ${className}Model
+	  */
+	@Transactional() 
+	@Override
+	@CacheEvict(value = "${secondModuleName}", key = "#${pk.attrName}")
+	public int delete${className}Model(${className}Model ${secondModuleName}Model){
+		return this.${secondModuleName}Service.delete${className}Model(${secondModuleName}Model);
+	}
+	
+	/**
+	  * 查询总数
+	  * @param ${className}Model
+	  */
+	 @Override
+	public Long queryCount${className}Model(${className}Model ${secondModuleName}Model){
+		return this.${secondModuleName}Service.queryCount${className}Model(${secondModuleName}Model);
+	}
+	
+}

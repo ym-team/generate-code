@@ -1,0 +1,117 @@
+package ${package}.client;
+
+import java.util.List;
+
+import com.evergrande.api.page.Pagination;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.stereotype.Component;
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import ${package}.vo.${className}SaveVo;
+import ${package}.vo.${className}QueryVo;
+import ${package}.vo.${className}UpdateVo;
+import ${package}.vo.${className}DeleteVo;
+
+
+/**
+ *${comments} 
+ * @author ${author}
+ * @date  ${datetime}
+ */
+@Component
+@FeignClient(value = "自己填", fallbackFactory = HtCloud${className}ClientHystrix.class,configuration = HtFeignHystrixConfiguration.class)
+public interface HtCloud${className}Client{
+	
+	/**默认三种传参方式 :
+		feign 
+			method(@RequestParam("id") long id,@RequestParam("userName") String userName);
+			method(@RequestParam Map<String,Object> map);
+			method(@RequestBody xxxModel xxxModel);
+	*/
+
+	
+	/**
+	   *  新增
+	   * @param ${className}SaveVo
+	   * @return int
+	   * @throws Exception
+	   */
+	@RequestMapping(value = "/HtCloud${className}/save${className}Model", method = RequestMethod.POST)   
+	public int save${className}Model(@RequestBody ${className}SaveVo  ${secondModuleName}SaveVo);
+	
+	
+	
+
+	/**
+	   * 批量新增
+	   * @param ${secondModuleName}SaveVo
+	   * @return int
+	   * @throws Exception
+	   */
+	@RequestMapping(value = "/HtCloud${className}/saveList${className}Model", method = RequestMethod.POST)    
+	public int saveList${className}Model(@RequestBody List<${className}SaveVo>  list${className}SaveVo);
+	
+
+  	 /**查询详情
+	   * 
+	   * @param ${className}QueryVo
+	   * @return ${className}QueryVo
+	   * @throws Exception
+	   */
+	@RequestMapping(value = "/HtCloud${className}/ queryDetail${className}Model", method = RequestMethod.POST)   
+	public ${className}QueryVo queryDetail${className}Model(@RequestBody ${className}QueryVo ${secondModuleName}QueryVo);
+  
+	/**
+	 * 查询列表
+	 * @param ${className}QueryVo
+	 * @return  List<${className}QueryVo>
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/HtCloud${className}/queryList${className}Model", method = RequestMethod.POST)    
+	public List<${className}QueryVo> queryList${className}Model(@RequestBody ${className}QueryVo ${secondModuleName}QueryVo);
+	  
+	/**
+	 * 分页
+	 * @param ${className}QueryVo
+	 * @param page
+	 * @return List<${className}QueryVo>
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/HtCloud${className}/queryListByPage${className}Model", method = RequestMethod.POST) 
+	public List<${className}QueryVo> queryListByPage${className}Model(@RequestBody ${className}QueryVo ${secondModuleName}QueryVo,Pagination page);
+	  
+	/**
+	 * 更新
+	 * @param ${className}SaveVo
+	 * @return int
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/HtCloud${className}/update${className}Model", method = RequestMethod.POST)
+	public int update${className}Model(@RequestBody ${className}UpdateVo ${secondModuleName}UpdateVo);
+	  
+	 /**
+	  * 删除 
+	  * @param ${className}DeleteVo
+	  * @return int
+	  * @throws Exception
+	  */
+	@RequestMapping(value = "/HtCloud${className}/delete${className}Model", method = RequestMethod.POST)  
+	public int delete${className}Model(@RequestBody ${className}DeleteVo ${secondModuleName}DeleteVo);
+	
+	/**
+	  *查询总数
+	  * @param ${className}QueryVo
+	  * @return Long
+	  * @throws Exception
+	  */
+	@RequestMapping(value = "/HtCloud${className}/queryCount${className}Model", method = RequestMethod.POST)  
+	public Long queryCount${className}Model(@RequestBody ${className}QueryVo ${secondModuleName}QueryVo);
+	
+	
+	  
+     
+
+}

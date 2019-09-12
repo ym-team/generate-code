@@ -1,0 +1,83 @@
+package ${package}.facade;
+
+import java.util.List;
+import com.github.pagehelper.PageHelper;
+
+import com.evergrande.api.page.Pagination;
+import com.evergrande.core.page.QueryData;
+
+
+import ${package}.model.${className}Model;
+
+/**
+ *
+ * ${comment}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+public interface ${className}Facade {
+
+
+	 /**
+	   * 新增
+	   * @param ${className}Model
+	   * @return int
+	   * @throws Exception
+	   */
+	public int save${className}Model(${className}Model  ${secondModuleName}Model);
+	
+	
+	
+
+	/**
+	   *批量新增
+	   * @param List<${className}Model>
+	   * @return
+	   * @throws Exception
+	   */
+	public int saveList${className}Model(List<${className}Model>  list${className}Model);
+	
+
+  	 /**
+	   * 查询详情
+	   * @param ${className}Model
+	   * @return
+	   * @throws Exception
+	   */
+	public ${className}Model queryDetail${className}Model(${className}Model ${secondModuleName}Model);
+  
+	/**
+	 * 查询列表
+	 * @param ${className}Model
+	 * @return
+	 * @throws Exception
+	 */
+	public List<${className}Model> queryList${className}Model(${className}Model ${secondModuleName}Model);
+	  
+	  
+	/**
+	 * 更新
+	 * @param ${className}Model
+	 * @return
+	 * @throws Exception
+	 */
+	public int update${className}Model(${className}Model ${secondModuleName}Model);
+	  
+	/**
+	  * 物理删除 
+	  * @param ${className}Model
+	  * @throws Exception
+	 */
+	public int delete${className}Model(${className}Model ${secondModuleName}Model);
+	
+	/**
+	  * 根据入参条件查询 总数
+	  * @param ${className}Model
+	  * @throws Exception
+	  */
+	public Long queryCount${className}Model(${className}Model ${secondModuleName}Model);
+	 
+  	
+  
+}

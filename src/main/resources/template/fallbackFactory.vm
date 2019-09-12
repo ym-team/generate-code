@@ -1,0 +1,123 @@
+package ${package}.hystrix;
+
+import java.util.List;
+
+
+import com.evergrande.api.page.Pagination;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.stereotype.Component;
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
+import feign.hystrix.FallbackFactory;
+
+import ${package}.client.HtCloud${className}Client;
+import com.evergrande.util.conversion.JsonUtil;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ${package}.vo.${className}SaveVo;
+import ${package}.vo.${className}QueryVo;
+import ${package}.vo.${className}UpdateVo;
+import ${package}.vo.${className}DeleteVo;
+
+
+/**
+ * @author ${author}
+ * @date  ${datetime}
+ */
+@Component
+public class HtCloud${className}ClientHystrix implements FallbackFactory<HtCloud${className}Client> {
+	
+	public static Logger LOGGER = LoggerFactory.getLogger(HtCloud${className}ClientHystrix.class);
+	
+	@Override
+	public HtCloud${className}Client create(Throwable cause) {
+		LOGGER.error(" HtCloud${className}ClientHystrix fallback reason -> " +  cause.toString());
+		return  new HtCloud${className}Client(){
+		
+				@Override
+				public int save${className}Model(@RequestBody ${className}SaveVo  ${secondModuleName}SaveVo){
+					LOGGER.error(" HtCloud${className}ClientHystrix -> save${className}Model -> params  " +  JsonUtil.toJsonString(${secondModuleName}SaveVo));
+					//TODO
+					
+					return 0;	
+				}
+	
+				@Override
+				public int saveList${className}Model(@RequestBody List<${className}SaveVo>  list${className}SaveVo){
+					LOGGER.error(" HtCloud${className}ClientHystrix -> save${className}ModelList -> params  " +  JsonUtil.toJsonString(list${className}SaveVo.size()));
+					//TODO
+					
+					return 0;
+				}
+				
+				@Override
+				public ${className}QueryVo queryDetail${className}Model(@RequestBody ${className}QueryVo ${secondModuleName}QueryVo){
+					LOGGER.error(" HtCloud${className}ClientHystrix -> query${className}ModelDetail -> params  " +  JsonUtil.toJsonString(${secondModuleName}QueryVo));
+					
+					//TODO
+					
+					return null;
+				}
+				
+			  	@Override
+				public List<${className}QueryVo> queryList${className}Model(@RequestBody ${className}QueryVo ${secondModuleName}QueryVo){
+					LOGGER.error(" HtCloud${className}ClientHystrix -> query${className}ModelList -> params  " +  JsonUtil.toJsonString(${secondModuleName}QueryVo));
+					
+					//TODO
+					
+					return null;
+				}
+				
+				@Override  
+				public List<${className}QueryVo> queryListByPage${className}Model(@RequestBody ${className}QueryVo ${secondModuleName}QueryVo,Pagination page){
+					LOGGER.error(" HtCloud${className}ClientHystrix -> query${className}ModelListByPage -> params  " +  JsonUtil.toJsonString(${secondModuleName}QueryVo));
+					
+					//TODO
+					
+					
+					return null;
+				}
+				
+				@Override  
+				public int update${className}Model(@RequestBody ${className}UpdateVo ${secondModuleName}UpdateVo){
+					LOGGER.error(" HtCloud${className}ClientHystrix -> update${className}Model -> params  " +  JsonUtil.toJsonString(${secondModuleName}UpdateVo));
+				
+					//TODO
+					
+					return 0;
+				}
+				
+				@Override  
+				public int delete${className}Model(@RequestBody ${className}DeleteVo ${secondModuleName}DeleteVo){
+					LOGGER.error(" HtCloud${className}ClientHystrix -> elete${className}Model -> params  " +  JsonUtil.toJsonString(${secondModuleName}DeleteVo));
+					
+					//TODO
+					
+					return 0;
+				}
+				
+				@Override
+				public Long queryCount${className}Model(@RequestBody ${className}QueryVo ${secondModuleName}QueryVo){
+					LOGGER.error(" HtCloud${className}ClientHystrix -> query${className}ModelCount -> params  " +  JsonUtil.toJsonString(${secondModuleName}QueryVo));
+					
+					//TODO
+					
+					return 0l;
+					
+				}
+				
+				
+						
+		};
+	}
+	
+
+	
+	  
+     
+
+}
