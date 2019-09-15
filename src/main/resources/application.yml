@@ -53,7 +53,9 @@ spring:
         # 登录监控界面的用户名以及密码，登录url为localhost:8080/druid
         login-username: admin
         login-password: admin
-        allow:
+        #白名单
+        allow: 
+        #黑名单  
         deny:
         
     jackson:

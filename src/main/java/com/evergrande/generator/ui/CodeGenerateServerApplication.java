@@ -13,6 +13,7 @@ public class CodeGenerateServerApplication {
 	//http://localhost:8080/druid/login.html
 	
 	//应该访问：http://localhost:7777/index
+	// http://localhost:7777/druid/index.html
 	public static void main(String[] args) {
 		SpringApplication.run(CodeGenerateServerApplication.class, args);
 	}
