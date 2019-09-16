@@ -13,7 +13,7 @@ import com.alibaba.fastjson.JSON;
  * @author ${author}
  * @date ${datetime}
  */
-public class ${className}Model implements Serializable{
+public class ${className}BOQ implements Serializable{
 
 
 	private static final long serialVersionUID=1L;

@@ -1,4 +1,9 @@
-package ${package}.dao;
+package ${package}.${secondModuleName};
+
+import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import com.github.pagehelper.Page;
 
 /**
  *
@@ -7,66 +12,87 @@ package ${package}.dao;
  * @author ${author}
  * @date ${datetime}
  */
+@Mapper
 public interface ${className}Mapper {
 
 	 /**
-	   * 新增
+	   * 新增 ${comment} 信息
 	   * @param ${className}Model
-	   * @return
+	   * @return int
 	   * @throws Exception
 	   */
-	public int save${className}Model(@Param("${secondModuleName}Model")${className}Model  ${secondModuleName}Model);
-	
+	public int save(@Param("${secondModuleName}Model")${className}Model  ${secondModuleName}Model);
 	
 	
 
 	/**
 	   *批量新增
 	   * @param List<${className}Model>
-	   * @return
+	   * @return int
 	   * @throws Exception
 	   */
-	public int saveList${className}Model(@Param("list${className}Model")List<${className}Model>  list${className}Model);
+	public int saveList(@Param("list${className}Model")List<${className}Model>  list${className}Model);
 	
 
   	 /**
 	   * 查询详情
 	   * @param ${className}Model
-	   * @return
+	   * @return ${className}Model
 	   * @throws Exception
 	   */
-	public ${className}Model queryDetail${className}Model(@Param("${secondModuleName}Model")${className}Model ${secondModuleName}Model);
+	public ${className}Model queryDetail(@Param("${secondModuleName}Model")${className}Model ${secondModuleName}Model);
   
 	/**
 	 * 查询列表
 	 * @param ${className}Model
-	 * @return
+	 * @return List<${className}Model>
 	 * @throws Exception
 	 */
-	public List<${className}Model> queryList${className}Model(@Param("${secondModuleName}Model")${className}Model ${secondModuleName}Model);
+	public List<${className}Model> queryList(@Param("${secondModuleName}Model")${className}Model ${secondModuleName}Model);
+	  
+	  
+	/**
+	 * 分页查询列表
+	 * @param ${className}Model
+	 * @return Page<${className}Model>
+	 * @throws Exception
+	 */
+	public Page<${className}Model> queryListByPage(@Param("${secondModuleName}Model")${className}Model ${secondModuleName}Model);
 	  
 	  
 	/**
 	 * 更新
 	 * @param ${className}Model
-	 * @return
+	 * @return int
 	 * @throws Exception
 	 */
-	public int update${className}Model(@Param("${secondModuleName}Model")${className}Model ${secondModuleName}Model);
+	public int update(@Param("${secondModuleName}Model")${className}Model ${secondModuleName}Model);
+	
+	
+	/**
+	 * 批量更新
+	 * @param List<${className}Model>
+	 * @return int
+	 * @throws Exception
+	 */
+	public int updateList(@Param("list${className}Model")List<${className}Model> list${className}Model);
 	  
+	  
+	    
 	 /**
 	  * 物理删除 
 	  * @param ${className}Model
+	  * @return int
 	  * @throws Exception
 	  */
-	public int delete${className}Model(@Param("${secondModuleName}Model")${className}Model ${secondModuleName}Model);
+	public int delete(@Param("${secondModuleName}Model")${className}Model ${secondModuleName}Model);
 	
 	/**
 	  * 根据入参条件查询 总数
 	  * @param ${className}Model
 	  * @throws Exception
 	  */
-	public Long queryCount${className}Model(@Param("${secondModuleName}Model")${className}Model ${secondModuleName}Model);
+	public Long queryCount(@Param("${secondModuleName}Model")${className}Model ${secondModuleName}Model);
 	
 	
 	  

@@ -1,16 +1,13 @@
-package ${package}.service;
+package ${package}.${secondModuleName};
 
 
 import java.util.List;
-import com.github.pagehelper.PageHelper;
+import com.cloud.util.page.PageInfo;
+import com.cloud.util.page.PageQuery;
+import com.github.pagehelper.Page;
 
-import com.evergrande.api.page.Pagination;
-import com.evergrande.core.page.QueryData;
 
-//import com.evergrande.common.Pagination;
-//import com.evergrande.common.QueryData;
-
-import ${package}.model.${className}Model;
+import ${package}.${secondModuleName}.${className}Model;
 
 
 
@@ -22,73 +19,90 @@ import ${package}.model.${className}Model;
  * @author ${author}
  * @since ${datetime}
  */
-public interface ${className}Service {
+public interface I${className}Service {
 
 
-	/**
-	   * 新增
-	   * @param ${className}Model
-	   * @return long
-	   *
+	 /**
+	   * 新增 ${comment} 信息
+	   * @param ${className}BOS
+	   * @return int
+	   * @throws Exception
 	   */
-	public long save${className}Model(${className}Model  ${secondModuleName}Model);
-	
+	public long save(${className}BOS  ${secondModuleName}BOS)throws Exception;
 	
 	
 
 	/**
 	   *批量新增
-	   * @param ${className}Model
-	   * @return
+	   * @param List<${className}BOS>
+	   * @return int
+	   * @throws Exception
 	   */
-	public int saveList${className}Model(List<${className}Model>  list${className}Model);
+	public int saveList(List<${className}BOS>  list${className}BOS)throws Exception;
 	
 
   	 /**
 	   * 查询详情
-	   * @param ${className}Model
-	   * @return ${className}Model
+	   * @param ${className}BOQ
+	   * @return ${className}VO
+	   * @throws Exception
 	   */
-	public ${className}Model queryDetail${className}Model(${className}Model ${secondModuleName}Model);
+	public ${className}VO queryDetail(${className}BOQ ${secondModuleName}BOQ)throws Exception;
   
-	/**查询列表
-	 * 
-	 * @param ${secondModuleName}Model
-	 * @return List<${secondModuleName}Model>
-	 */
-	public List<${className}Model> queryList${className}Model(${className}Model ${secondModuleName}Model);
-	  
-	  
-	/**分页查询列表
-	 * 
-	 * @param ${className}Model
-	 * @param page
-	 * @return QueryData
-	 */
-	public QueryData queryListByPage${className}Model(${className}Model ${secondModuleName}Model,Pagination page);
-	
-		  
 	/**
-	 *更新
-	 * @param ${className}Model
-	 * @return
+	 * 查询列表
+	 * @param ${className}BOQ
+	 * @return List<${className}VO>
+	 * @throws Exception
 	 */
-	public int update${className}Model(${className}Model ${secondModuleName}Model);
+	public List<${className}VO> queryList(${className}BOQ ${secondModuleName}BOQ)throws Exception;
 	  
-	 /**删除 
-	  * 
-	  * @param ${className}Model
-	  *
-	  */
-	public int delete${className}Model(${className}Model ${secondModuleName}Model);
+	  
+	/**
+	 * 分页查询列表
+	 * @param ${className}BOQP
+	 * @return PageQuery<${className}VO>
+	 * @throws Exception
+	 */
+	public PageQuery<${className}VO> queryListByPage(${className}BOQP ${secondModuleName}BOQP,PageInfo page)throws Exception;
+	  
+	  
+	/**
+	 * 更新
+	 * @param ${className}BOU
+	 * @return int
+	 * @throws Exception
+	 */
+	public int update(${className}BOU ${secondModuleName}BOU)throws Exception;
+	
 	
 	/**
-	  * 查询总数
-	  * @param ${className}Model
-	  */
-	public Long queryCount${className}Model(${className}Model ${secondModuleName}Model);
+	 * 批量更新
+	 * @param List<${className}BOU>
+	 * @return int
+	 * @throws Exception
+	 */
+	public int updateList(List<${className}BOU> list${className}BOU)throws Exception;
 	  
-     
-  	
+	  
+	    
+	 /**
+	  * 物理删除 
+	  * @param ${className}BOD
+	  * @return int
+	  * @throws Exception
+	  */
+	public int delete(${className}BOD ${secondModuleName}BOD)throws Exception;
 	
+	/**
+	  * 根据入参条件查询 总数
+	  * @param ${className}BOQ
+	  * @return Long
+	  * @throws Exception
+	  */
+	public Long queryCount(${className}BOQ ${secondModuleName}BOQ)throws Exception;
+	
+	
+	  
+
 }

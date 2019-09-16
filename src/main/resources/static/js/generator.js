@@ -106,7 +106,7 @@ layui.use(['form', 'layedit', 'laydate', 'upload'], function () {
                     var form = $(layero).find("iframe")[0].contentWindow.document.getElementById("generatorForm");
                     var moduleName = $($(layero).find("iframe")[0].contentWindow.document.getElementById("moduleName"));
                     var author = $($(layero).find("iframe")[0].contentWindow.document.getElementById("author"));
-                    var IDLFileName = $($(layero).find("iframe")[0].contentWindow.document.getElementById("IDLFileName"));
+                    //var IDLFileName = $($(layero).find("iframe")[0].contentWindow.document.getElementById("IDLFileName"));
                     if (moduleName == null || moduleName.val() == "") {
                         layer.msg("模块名称不能为空", {icon : 2, time: 2000});
                         return;
@@ -115,10 +115,10 @@ layui.use(['form', 'layedit', 'laydate', 'upload'], function () {
                         layer.msg("作者不能为空", {icon : 2, time: 2000});
                         return;
                     }
-                    if (IDLFileName == null || IDLFileName.val() == "") {
+/*                    if (IDLFileName == null || IDLFileName.val() == "") {
                         layer.msg("请上传IDL模板", {icon : 2, time: 2000});
                         return;
-                    }
+                    }*/
                     var $form = $(form).serialize();
 
                     var tableNames = "";

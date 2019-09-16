@@ -1,0 +1,10 @@
+insert into menu(parentId, name, url, css, sort, createTime, updateTime) values (17,'$!{comments}', 'pages/business/${secondModuleName}/${secondModuleName}List.html', 'fa-cube', '1', '${datetime}', '${datetime}');
+
+insert into sys_permission(permission, name, createTime, updateTime) values('back:${secondModuleName}:save', '添加$!{comments}信息', '${datetime}', '${datetime}');
+insert into sys_permission(permission, name, createTime, updateTime) values('back:${secondModuleName}:saveList', '批量添加$!{comments}信息', '${datetime}', '${datetime}');
+insert into sys_permission(permission, name, createTime, updateTime) values('back:${secondModuleName}:update', '修改$!{comments}信息', '${datetime}', '${datetime}');
+insert into sys_permission(permission, name, createTime, updateTime) values('back:${secondModuleName}:updateList', '批量添加$!{comments}信息', '${datetime}', '${datetime}'); 
+insert into sys_permission(permission, name, createTime, updateTime) values('back:${secondModuleName}:delete', '删除$!{comments}信息', '${datetime}', '${datetime}'); 
+insert into sys_permission(permission, name, createTime, updateTime) values('back:${secondModuleName}:queryDetail', '查询$!{comments}详情信息', '${datetime}', '${datetime}');  
+insert into sys_permission(permission, name, createTime, updateTime) values('back:${secondModuleName}:queryList', '查询$!{comments}列表信息', '${datetime}', '${datetime}');
+insert into sys_permission(permission, name, createTime, updateTime) values('back:${secondModuleName}:queryListByPage', '分页查询$!{comments}列表信息', '${datetime}', '${datetime}'); 

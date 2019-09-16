@@ -39,28 +39,43 @@ public class GeneratorUtils {
         templates.add("template/controller.java.vm");
         templates.add("template/service.java.vm");
         templates.add("template/serviceImpl.java.vm");
-        templates.add("template/FacadeImpl.vm");
-        templates.add("template/Facade.vm");
-        templates.add("template/dubbo.vm");
-        templates.add("template/dubboImpl.vm");
-        templates.add("template/feignClient.vm");
-        templates.add("template/fallbackFactory.vm");
+       // templates.add("template/FacadeImpl.vm");
+        //templates.add("template/Facade.vm");
+       // templates.add("template/dubbo.vm");
+      //  templates.add("template/dubboImpl.vm");
+      //  templates.add("template/feignClient.vm");
+      //  templates.add("template/fallbackFactory.vm");
         
-        templates.add("template/server/application.properties.vm");
-        templates.add("template/server/bootstrap.properties.vm");
-        templates.add("template/server/logback-spring.vm");
-        templates.add("template/server/pom.xml.vm");
+      //  templates.add("template/server/application.properties.vm");
+       // templates.add("template/server/bootstrap.properties.vm");
+      //  templates.add("template/server/logback-spring.vm");
+      //  templates.add("template/server/pom.xml.vm");
         
-        templates.add("template/api/pom.xml.api.vm");
-        templates.add("template/vodelete.java.vm");
-        templates.add("template/voquery.java.vm");
-        templates.add("template/vosave.java.vm");
-        templates.add("template/voupdate.java.vm");
+     //   templates.add("template/api/pom.xml.api.vm");
+//        templates.add("template/vodelete.java.vm");
+    //    templates.add("template/voquery.java.vm");
+    //    templates.add("template/vosave.java.vm");
+     //   templates.add("template/voupdate.java.vm");
         
-        templates.add("template/test/application.properties.test.vm");
-        templates.add("template/test/bootstrap.properties.test.vm");
-        templates.add("template/test/logback-spring.test.vm");
-        templates.add("template/test/pom.xml.test.vm");
+        templates.add("template/modelD.java.vm");
+        templates.add("template/modelQ.java.vm");
+        templates.add("template/modelQP.java.vm");
+        templates.add("template/modelS.java.vm");
+        templates.add("template/modelU.java.vm");
+        templates.add("template/modelVO.java.vm");
+        
+        templates.add("template/pagelist.html.vm");
+        templates.add("template/pageadd.html.vm");
+        templates.add("template/pageupdate.html.vm");
+        
+        templates.add("template/menu-permision.vm");
+        
+     //   templates.add("template/test/application.properties.test.vm");
+    //    templates.add("template/test/bootstrap.properties.test.vm");
+     //   templates.add("template/test/logback-spring.test.vm");
+     //   templates.add("template/test/pom.xml.test.vm");
+        
+        
         
         
         return templates;
@@ -146,7 +161,8 @@ public class GeneratorUtils {
                 Template tpl = Velocity.getTemplate(template, "UTF-8");
                 tpl.merge(context, sw);
                 //添加到zip
-                zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), config.getString("package"), config.getString("mainModule"))));
+                String fileNameForOneFolder = getFileNameForOneFolder(template, tableEntity.getClassName(), config.getString("package"), config.getString("mainModule"));
+                zip.putNextEntry(new ZipEntry(fileNameForOneFolder));
                 IOUtils.write(sw.toString(), zip, "UTF-8");
                 zip.closeEntry();
             } catch (IOException e) {
@@ -187,8 +203,69 @@ public class GeneratorUtils {
      * 获取文件名
      */
     public static String projectName = "order";
+    
+    public static String getFileNameForOneFolder(String template, String className, String packageName, String moduleName) {
+    	String packagePath = "sc-backend-single" + File.separator + "main" + File.separator + "java" + File.separator; 
+        if (StringUtils.isNotBlank(packageName)) {
+            packagePath += packageName.replace(".", File.separator) + File.separator;
+        }
+        
+        if (template.contains("controller.java.vm")) {
+            return packagePath +"com"+ File.separator+"cloud"+File.separator +"business"+File.separator +toLowerCaseFirstOne(className) + File.separator+ className + "Controller.java";
+        }
+        if (template.contains("service.java.vm")) {
+        	return packagePath +"com"+ File.separator+"cloud"+File.separator +"business"+File.separator +toLowerCaseFirstOne(className) + File.separator+ "I"+className + "Service.java";
+        }
+        
+        if (template.contains("serviceImpl.java.vm")) {
+        	return packagePath +"com"+ File.separator+"cloud"+File.separator +"business"+File.separator +toLowerCaseFirstOne(className) + File.separator+ className + "ServiceImpl.java";
+        }
 
-    public static String getFileName(String template, String className, String packageName, String moduleName) {
+        if (template.contains("mapper.java.vm")) {
+        	return packagePath +"com"+ File.separator+"cloud"+File.separator +"business"+File.separator + toLowerCaseFirstOne(className) + File.separator+ className + "Mapper.java";
+        }
+        if (template.contains("mapper.xml.vm")) {
+        	return packagePath +"com"+ File.separator+"cloud"+File.separator +"business"+File.separator + toLowerCaseFirstOne(className) + File.separator+ className + "Mapper.xml";
+        }
+        if (template.contains("model.java.vm")) {
+        	return packagePath +"com"+ File.separator+"cloud"+File.separator +"business"+ File.separator +toLowerCaseFirstOne(className) + File.separator+ className + "Model.java";
+        }
+        if (template.contains("modelD.java.vm")) {
+        	return packagePath +"com"+ File.separator+"cloud"+File.separator +"business"+ File.separator +toLowerCaseFirstOne(className) + File.separator+ className + "BOD.java";
+        }
+        if (template.contains("modelQ.java.vm")) {
+        	return packagePath +"com"+ File.separator+"cloud"+File.separator +"business"+ File.separator +toLowerCaseFirstOne(className) + File.separator+ className + "BOQ.java";
+        }
+        if (template.contains("modelQP.java.vm")) {
+        	return packagePath +"com"+ File.separator+"cloud"+File.separator +"business"+ File.separator +toLowerCaseFirstOne(className) + File.separator+ className + "BOQP.java";
+        }
+        if (template.contains("modelS.java.vm")) {
+        	return packagePath +"com"+ File.separator+"cloud"+File.separator +"business"+ File.separator +toLowerCaseFirstOne(className) + File.separator+ className + "BOS.java";
+        }
+        if (template.contains("modelU.java.vm")) {
+        	return packagePath +"com"+ File.separator+"cloud"+File.separator +"business"+ File.separator +toLowerCaseFirstOne(className) + File.separator+ className + "BOU.java";
+        }
+        if (template.contains("modelVO.java.vm")) {
+        	return packagePath +"com"+ File.separator+"cloud"+File.separator +"business"+ File.separator +toLowerCaseFirstOne(className) + File.separator+ className + "VO.java";
+        }
+        if (template.contains("pageadd.html.vm")) {
+        	return packagePath +"com"+ File.separator+"cloud"+File.separator +"business"+ File.separator +toLowerCaseFirstOne(className) + File.separator + "add"+className+".html";
+        }
+        if (template.contains("pagelist.html.vm")) {
+        	return packagePath +"com"+ File.separator+"cloud"+File.separator +"business"+ File.separator +toLowerCaseFirstOne(className) + File.separator+ toLowerCaseFirstOne(className) + "List.html";
+        }
+        if (template.contains("pageupdate.html.vm")) {
+        	return packagePath +"com"+ File.separator+"cloud"+File.separator +"business"+ File.separator +toLowerCaseFirstOne(className) + File.separator+"update" +className + ".html";
+        }
+        
+        if(template.contains("menu-permision.vm")){
+        	return packagePath +"com"+ File.separator+"cloud"+File.separator +"business"+ File.separator +toLowerCaseFirstOne(className) + File.separator+"update" +className + ".sql";
+        }
+        return null;
+
+    }
+
+    public static String getFileNameForPro(String template, String className, String packageName, String moduleName) {
         String packagePath = projectName+"-server" + File.separator + "main" + File.separator + "java" + File.separator;
         //String frontPath = "ui" + File.separator;
         if (StringUtils.isNotBlank(packageName)) {
@@ -302,6 +379,15 @@ public class GeneratorUtils {
             return s;
         } else {
             return (new StringBuilder()).append(Character.toLowerCase(s.charAt(0))).append(s.substring(1)).toString();
+        }
+    }
+    
+    //首字母转大写
+    public static String toUpCaseFirstOne(String s) {
+        if (Character.isUpperCase(s.charAt(0))) {
+            return s;
+        } else {
+            return (new StringBuilder()).append(Character.toUpperCase(s.charAt(0))).append(s.substring(1)).toString();
         }
     }
 }

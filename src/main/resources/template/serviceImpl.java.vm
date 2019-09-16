@@ -1,9 +1,23 @@
-package ${package}.service.impl;
+package ${package}.${secondModuleName};
 
-import ${package}.model.${className}Model;
-import ${package}.mapper.${className}Mapper;
-import ${package}.service.${className}Service;
+/**
+import ${package}.${className}.${className}Model;
+import ${package}.${className}.${className}Mapper;
+import ${package}.${className}.${className}Service;
+*/
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.cloud.util.BeanConvertUtils;
+import com.cloud.util.page.PageInfo;
+import com.cloud.util.page.PageQuery;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * <p>
@@ -14,12 +28,13 @@ import org.springframework.stereotype.Service;
  * @author ${author}
  * @date  ${datetime}
  */
+@Slf4j
 @Service
-public class ${className}ServiceImpl implements ${className}Service  {
+public class ${className}ServiceImpl implements I${className}Service  {
 
 
-  @Autowired
-  private ${className}Mapper ${secondModuleName}Mapper;
+	  @Autowired
+	  private ${className}Mapper ${secondModuleName}Mapper;
   
   
      /**
@@ -28,100 +43,112 @@ public class ${className}ServiceImpl implements ${className}Service  {
 	   * @return long
 	 */
 	  @Override
-	  public long save${className}Model(${className}Model ${secondModuleName}Model) {
-		int count = this.${secondModuleName}Mapper.save${className}Model(${secondModuleName}Model);
+	  public long save(${className}BOS ${secondModuleName}BOS) throws Exception{
+	  	${className}Model ${secondModuleName}Model = BeanConvertUtils.convert(${secondModuleName}BOS, ${className}Model.class);
+		int count = this.${secondModuleName}Mapper.save(${secondModuleName}Model);
 	    return ${secondModuleName}Model.get${pk.attrName}();
 	  }
   
 	   /**
-		 *
-		 * @param List<${className}Model>
-		  * @return	int
+		 *批量新增
+		 * @param List<${className}BOS>
+		 * @return	int
 		*/
 	  @Override
-	  public int saveList${className}Model(List<${className}Model> list${className}Model) {
-		int count = this.${secondModuleName}Mapper.saveList${className}Model(list${className}Model);
+	  public int saveList(List<${className}BOS> list${className}BOS) throws Exception {
+	  	List<${className}Model> list${className}Model = BeanConvertUtils.convertList(list${className}BOS, ${className}Model.class);
+		int count = this.${secondModuleName}Mapper.saveList(list${className}Model);
 	    return count;
 	  }
 
   
   
   	/**
-	   *
-	   * @param ${className}Model
-	   * @return	${className}Model
+	   *查询详情
+	   * @param ${className}BOQ
+	   * @return ${className}VO
 	   */
 	@Override
-	public ${className}Model queryDetail${className}Model(${className}Model ${secondModuleName}Model) {
-		${secondModuleName}Model = this.${secondModuleName}Mapper.queryDetail${className}Model(${secondModuleName}Model);
-		return ${secondModuleName}Model;
+	public ${className}VO queryDetail(${className}BOQ ${secondModuleName}BOQ) throws Exception{
+		${className}Model ${secondModuleName}Model = BeanConvertUtils.convert(${secondModuleName}BOQ, ${className}Model.class);
+		${secondModuleName}Model = this.${secondModuleName}Mapper.queryDetail(${secondModuleName}Model);
+		return BeanConvertUtils.convert(${secondModuleName}Model, ${className}VO.class);
 	}
   
 	/**
 	 * 
-	 * @param ${className}Model
-	 * @return	List<${className}Model>
+	 * @param ${className}BOQ
+	 * @return	List<${className}VO>
+	 * ${table.JavaName}
 	 */
 	@Override
-	public List<${className}Model> queryList${className}Model(${className}Model ${secondModuleName}Model){
-		List<${className}Model> list${table.JavaName}Model = this.${secondModuleName}Mapper.queryList${className}Model(${secondModuleName}Model);
-		return list${className}Model;
+	public List<${className}VO> queryList(${className}BOQ ${secondModuleName}BOQ) throws Exception{
+		${className}Model ${secondModuleName}Model = BeanConvertUtils.convert(${secondModuleName}BOQ, ${className}Model.class);
+		List<${className}Model> list${className}Model = this.${secondModuleName}Mapper.queryList(${secondModuleName}Model);
+		return  BeanConvertUtils.convertList(list${className}Model, ${className}VO.class);
 	}
 	  
 	
 	/**
 	 * 
-	 * @param ${className}Model
+	 * @param ${className}BOQP
 	 * @param page
-	 * @return QueryData
+	 * @return PageQuery<${className}VO>
 	 */
-	public QueryData queryListByPage${className}Model(${className}Model ${secondModuleName}Model,Pagination page) {
-		List<${className}Model> list${className}Model = new ArrayList<${className}Model>();
-		QueryData queryData = new QueryData();
-		
-		Page<Object> startPage = PageHelper.startPage(page.getCurrentPage(), page.getPageSize(), page.getOrderby());
-		list${className}Model = this.queryList${className}Model(${secondModuleName}Model);
-		 
-		queryData.setCurrPage(page.getCurrentPage());
-		queryData.setDataList(list${className}Model);
-		String total = String.valueOf(startPage.getTotal());
-		queryData.setTotalCount(Integer.valueOf(total));
-	    queryData.build();
-		queryData.setPageSize(page.getPageSize());
-	
-		return queryData;
+	@Override
+	public PageQuery<${className}VO> queryListByPage(${className}BOQP ${secondModuleName}BOQP,PageInfo page) throws Exception{
+		${className}Model ${secondModuleName}Model = BeanConvertUtils.convert(${secondModuleName}BOQP, ${className}Model.class);
+		PageHelper.startPage(page.getCurrPage(), page.getPageSize(), page.getOrderby());
+		Page<${className}Model> queryListByPage = this.${secondModuleName}Mapper.queryListByPage(${secondModuleName}Model);
+		return  new PageQuery(queryListByPage, ${className}VO.class);
 	}
 	
 	
 	  
 	/**
 	 *
-	 * @param ${className}Model
+	 * @param ${className}BOU
 	 * @return int
 	 */
-	 @Override
-	public int update${className}Model(${className}Model ${secondModuleName}Model) {
-		return this.${secondModuleName}Mapper.update${className}Model(${secondModuleName}Model);
+	@Override
+	public int update(${className}BOU ${secondModuleName}BOU) throws Exception{
+		${className}Model ${secondModuleName}Model = BeanConvertUtils.convert(${secondModuleName}BOU, ${className}Model.class);
+		return this.${secondModuleName}Mapper.update(${secondModuleName}Model);
 	}
+	
+	
+	/**
+	 *
+	 * @param List<${className}BOU>
+	 * @return int
+	 */
+	@Override
+	public int updateList(List<${className}BOU> list${className}BOU) throws Exception{
+		List<${className}Model> list${className}Model = BeanConvertUtils.convertList(list${className}BOU, ${className}Model.class);
+		return this.${secondModuleName}Mapper.updateList(list${className}Model);
+	}
+	
 	  
 	 /**
 	  * 
-	  * @param ${className}Model
+	  * @param ${className}BOD
 	  * @return int
 	  */
 	  @Override
-	public int delete${className}Model(${className}Model ${secondModuleName}Model){
-		return this.${secondModuleName}Mapper.delete${className}Model(${secondModuleName}Model);
+	public int delete(${className}BOD ${secondModuleName}BOD) throws Exception{
+		${className}Model ${secondModuleName}Model = BeanConvertUtils.convert(${secondModuleName}BOD, ${className}Model.class);
+		return this.${secondModuleName}Mapper.delete(${secondModuleName}Model);
 	}
 	
 	/**
 	  * 
-	  * @param ${className}Model
+	  * @param ${className}BOQ
 	  * @return Long
 	  */
 	 @Override
-	public Long queryCount${className}Model(${className}Model ${secondModuleName}Model){
-		return this.${secondModuleName}Mapper.queryCount${className}Model(${secondModuleName}Model);
+	public Long queryCount(${className}BOQ ${secondModuleName}BOQ) throws Exception{
+		${className}Model ${secondModuleName}Model = BeanConvertUtils.convert(${secondModuleName}BOQ, ${className}Model.class);
+		return this.${secondModuleName}Mapper.queryCount(${secondModuleName}Model);
 	}
 
 

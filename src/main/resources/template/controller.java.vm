@@ -1,13 +1,24 @@
-package ${package}.dubbo;
+package ${package}.${secondModuleName};
 
+
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.alibaba.fastjson.JSON;
+import com.cloud.util.LogAnnotation;
+import com.cloud.util.page.PageInfo;
+import com.cloud.util.page.PageQuery;
 import java.util.List;
 
-import com.evergrande.api.page.Pagination;
-
-import ${package}.vo.${className}SaveVo;
-import ${package}.vo.${className}QueryVo;
-import ${package}.vo.${className}UpdateVo;
-import ${package}.vo.${className}DeleteVo;
 
 
 /**
@@ -18,74 +29,145 @@ import ${package}.vo.${className}DeleteVo;
  * @author ${author}
  * @date  ${datetime}
  */
-public interface ${className}Dubbo{
+@RestController
+public class ${className}Controller{
+
+	@Autowired
+	private I${className}Service ${secondModuleName}Service;
 
 	/**
-	   * 新增
-	   * @param ${className}SaveVo
+	   * 添加$!{comments}信息
+	   * @param ${className}BOS
 	   * @return long
 	   * @throws Exception
 	   */
-	public long save${className}Model(${className}SaveVo  ${secondModuleName}SaveVo);
+	@LogAnnotation(module = " 添加$!{comments}信息")
+	@PreAuthorize("hasAuthority('back:${secondModuleName}:save')")
+	@PostMapping("/api-business/${secondModuleName}/save")
+	public void save(@RequestBody ${className}BOS  ${secondModuleName}BOS)throws Exception{
+		long id = this.${secondModuleName}Service.save(${secondModuleName}BOS);
+	}
 	
 	
 	
 
 	/**
-	   * 批量新增
-	   * @param ${className}SaveVo
+	   * 批量添加$!{comments}信息
+	   * @param ${className}BOS
 	   * @return
 	   * @throws Exception
 	   */
-	public int saveList${className}Model(List<${className}SaveVo>  list${className}SaveVo);
+	@LogAnnotation(module = "批量添加$!{comments}信息")
+	@PreAuthorize("hasAuthority('back:${secondModuleName}:saveList')")
+	@PostMapping("/api-business/${secondModuleName}/saveList")
+	public void saveList(@RequestBody List<${className}BOS>  list${className}BOS)throws Exception{
+		long count = this.${secondModuleName}Service.saveList(list${className}BOS);
+	}
+	
+	
+	
+	/**
+	 * 更新$!{comments}信息
+	 * @param ${className}BOU
+	 * @throws Exception
+	 */
+	@LogAnnotation(module = "更新$!{comments}信息")
+	@PreAuthorize("hasAuthority('back:${secondModuleName}:update')")
+	@PutMapping("/api-business/${secondModuleName}/update")
+	public void update(@RequestBody ${className}BOU ${secondModuleName}BOU)throws Exception{
+		long count = this.${secondModuleName}Service.update(${secondModuleName}BOU);
+	}
+	
+	/**
+	 * 批量更新$!{comments}信息
+	 * @param List<${className}BOU>
+	 * @throws Exception
+	 */
+	@LogAnnotation(module = "批量更新$!{comments}")
+	@PreAuthorize("hasAuthority('back:${secondModuleName}:updateList')")
+	@PutMapping("/api-business/${secondModuleName}/updateList")
+	public void updateList(@RequestBody List<${className}BOU> list${className}BOU)throws Exception{
+		long count = this.${secondModuleName}Service.updateList(list${className}BOU);
+	}
+	  
+	  
+	 /**
+	  *删除$!{comments}信息
+	  * @param ${className}BOD
+	  * @throws Exception
+	  */
+	@LogAnnotation(module = "删除$!{comments}信息")
+	@PreAuthorize("hasAuthority('back:${secondModuleName}:delete')")
+	//@PutMapping("/api-business/${secondModuleName}/delete")   
+	@DeleteMapping("/api-business/${secondModuleName}/delete/{${pk.attrname}}") 
+	public void delete(@PathVariable Long ${pk.attrname})throws Exception{	 //@RequestBody ${className}BOD ${secondModuleName}BOD
+		${className}BOD ${secondModuleName}BOD = new ${className}BOD();
+		${secondModuleName}BOD.set${pk.attrName}(${pk.attrname});
+		long count = this.${secondModuleName}Service.delete(${secondModuleName}BOD);
+	}
+	
 	
 
   	 /**
-	   * 查询详情
+	   * 查询$!{comments}详情信息
 	   * @param ${className}QueryVo
 	   * @return
 	   * @throws Exception
 	   */
-	public ${className}QueryVo queryDetail${className}Model(${className}QueryVo ${secondModuleName}QueryVo);
+	@LogAnnotation(module = "查询$!{comments}详情信息")
+	@PreAuthorize("hasAuthority('back:${secondModuleName}:queryDetail')")
+	@GetMapping("/api-business/${secondModuleName}/queryDetail")
+	//public HospitalVO queryDetail(@RequestBody(required=false)  ${className}BOQ ${secondModuleName}BOQ){
+	public ${className}VO queryDetail(@RequestParam(required=false) long ${pk.attrname})throws Exception{
+		${className}BOQ ${secondModuleName}BOQ = new ${className}BOQ();
+		${secondModuleName}BOQ.set${pk.attrName}(${pk.attrname});
+		return this.${secondModuleName}Service.queryDetail(${secondModuleName}BOQ);
+	}
   
 	/**
-	 * 查询列表
-	 * @param ${className}QueryVo
-	 * @return List<${className}QueryVo>
+	 * 查询$!{comments}列表
+	 * @param ${className}BOQ
+	 * @return List<${className}VO>
 	 * @throws Exception
 	 */
-	public List<${className}QueryVo> queryList${className}Model(${className}QueryVo ${secondModuleName}QueryVo);
+	@LogAnnotation(module = "查询$!{comments}列表")
+	@PreAuthorize("hasAuthority('back:${secondModuleName}:queryList')")
+	@GetMapping("/api-business/${secondModuleName}/queryList")
+	public List<${className}VO> queryList(@RequestBody(required=false) ${className}BOQ ${secondModuleName}BOQ)throws Exception{
+		return this.${secondModuleName}Service.queryList(${secondModuleName}BOQ);
+	}
 	  
 	/**
-	 * 分布查询列表
-	 * @param ${className}QueryVo
-	 * @param page
-	 * @return	List<${className}QueryVo>
+	 * 分页查询$!{comments}列表
+	 * @param ${className}BOQP
+	 * @return	List<${className}VO>
 	 * @throws Exception
 	 */
-	public List<${className}QueryVo> queryListByPage${className}Model(${className}QueryVo ${secondModuleName}QueryVo,Pagination page);
+	@LogAnnotation(module = "分页查询$!{comments}列表")
+	@PreAuthorize("hasAuthority('back:${secondModuleName}:queryListByPage')")
+	@GetMapping("/api-business/${secondModuleName}/queryListByPage")	
+	//public PageQuery<HospitalVO> queryListByPage(@RequestBody(required=false) ${className}BOQP ${secondModuleName}BOP){
+	public PageQuery<${className}VO> queryListByPage(@RequestParam Map<String, Object> params)throws Exception{
+		${className}BOQP ${secondModuleName}BOQP = JSON.parseObject(JSON.toJSONString(params), ${className}BOQP.class);
+		PageInfo pageInfo = new PageInfo();
+		pageInfo.setStart(Integer.valueOf(params.get("start").toString()));
+		pageInfo.setPageSize(Integer.valueOf(params.get("length").toString()));
+		return this.${secondModuleName}Service.queryListByPage(${secondModuleName}BOQP,pageInfo);
+	}
 	  
+
 	/**
-	 * 更新
-	 * @param ${className}UpdateVo
-	 * @return int
-	 * @throws Exception
-	 */
-	public int update${className}Model(${className}UpdateVo ${secondModuleName}UpdateVo);
-	  
-	 /**
-	  * 
-	  * @param ${className}DeleteVo
+	  * 查询$!{comments}总数
+	  * @param ${className}BOQ
+	  * @return Long
 	  * @throws Exception
 	  */
-	public int delete${className}Model(${className}DeleteVo ${secondModuleName}DeleteVo);
-	
-	/**
-	  *删除  
-	  * @param ${className}QueryVo
-	  * @throws Exception
-	  */
-	public Long queryCount${className}Model(${className}QueryVo ${secondModuleName}QueryVo);
+	@LogAnnotation(module = "查询$!{comments}总数")
+	@PreAuthorize("hasAuthority('back:${secondModuleName}:queryCount')")
+	@GetMapping("/api-business/${secondModuleName}/queryCount")
+	public Long queryCount(${className}BOQ ${secondModuleName}BOQ)throws Exception{
+		return this.${secondModuleName}Service.queryCount(${secondModuleName}BOQ);
+	}
 	
 	
 	  
