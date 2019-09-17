@@ -58,7 +58,7 @@
 
 
 
-<insert id="save" parameterType="${package}.${secondModuleName}.${className}Model" useGeneratedKeys="true" keyProperty="${secondModuleName}.${pk.attrname}" keyColumn="${pk.columnName}">
+<insert id="save" parameterType="${package}.${secondModuleName}.${className}Model" useGeneratedKeys="true" keyProperty="${secondModuleName}Model.${pk.attrname}" keyColumn="${pk.columnName}">
 		insert into ${tableName}
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 		<if test="${secondModuleName}Model != null">
